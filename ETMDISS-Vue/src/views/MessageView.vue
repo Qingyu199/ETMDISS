@@ -7,7 +7,7 @@
         <button @click="greet">打招呼</button>
         <p>{{ greeting }}</p>
         <router-link to='/userlist'>前往列表</router-link>
-        -
+        <p></p>
         <router-link to="/">返回首页</router-link>
     </div>
 </template>

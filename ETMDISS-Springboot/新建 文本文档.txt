@@ -1,0 +1,8 @@
+docker run -d `
+--name etmdiss-backend `
+--link etmdiss-mysql:mysql `
+-p 8081:8080 `
+-e SPRING_DATASOURCE_URL="jdbc:mysql://mysql:3306/etmdiss?useSSL=false&serverTimezone=UTC" `
+-e SPRING_DATASOURCE_USERNAME=etm_user `
+-e SPRING_DATASOURCE_PASSWORD=etm_pass `
+etmdiss-app

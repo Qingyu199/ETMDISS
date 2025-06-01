@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import MessageView from '../views/MessageView.vue'
 import UserListView from '../views/UserListView.vue'
 import UserFilter from '../views/UserFilter.vue'
+import TaskList from '../views/TaskList.vue'
 
 const routes = [
   {
@@ -12,7 +13,8 @@ const routes = [
   },
   { path:'/message', name:'message', component: MessageView},
   { path:'/userlist', name:'userlist', component: UserListView},
-  { path:'/userfilter', name:'userfilter', component: UserFilter}
+  { path:'/userfilter', name:'userfilter', component: UserFilter},
+  { path:'/tasklist', name:'tasklis', component: TaskList}
 ]
 
 const router = createRouter({
