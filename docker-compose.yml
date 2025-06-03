@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: etmdiss-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: etmdiss
+      MYSQL_USER: etm_user
+      MYSQL_PASSWORD: etm_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./ETMDISS-docker/mysql/data:/var/lib/mysql
+      - ./ETMDISS-docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --default-authentication-plugin=mysql_native_password
+
+  backend:
+    build:
+      context: ./ETMDISS-Springboot
+    container_name: etmdiss-backend
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/etmdiss?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+      SPRING_DATASOURCE_USERNAME: etm_user
+      SPRING_DATASOURCE_PASSWORD: etm_pass
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
